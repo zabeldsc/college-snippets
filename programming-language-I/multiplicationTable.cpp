@@ -9,6 +9,6 @@ int main(){
 
     for(int x = 1; x < 11; x++)
     {
-        printf("%f * %d = %f\n", number, x, number * x);
+        printf("%0.2f * %d = %0.2f\n", number, x, number * x);
     }
 }
