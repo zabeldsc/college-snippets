@@ -4,7 +4,7 @@
 
 int main()
 {
-    int position, fibonacci[300] = {1, 1}, counter = 2;
+    int position = 0, fibonacci[300] = {1, 1}, counter = 2;
 
     while (position < 2)
     {
