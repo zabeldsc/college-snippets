@@ -21,7 +21,7 @@ void mesclaArrays(int arr1[], int tamanho1, int arr2[], int tamanho2, int result
 
 int main ()
 {
-  # O problema desse código se encontra aqui, os tamanhos dos vetores são estáticos, o que dificulta que haja uma manipulação mais flexível de suas informações!
+  // O problema desse código se encontra aqui, os tamanhos dos vetores são estáticos, o que dificulta que haja uma manipulação mais flexível de suas informações!
   int arr1[10] = {1, 2 , 3, 4, 5, 6, 7, 8, 9, 10}, arr2[6] = {11, 12, 13, 14, 15, 16}, resultado[16];
   mesclaArrays(arr1, 10, arr2, 6, resultado);
   
