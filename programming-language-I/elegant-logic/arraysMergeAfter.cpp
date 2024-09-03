@@ -21,7 +21,7 @@ void mesclaArrays(int arr1[], int tamanho1, int arr2[], int tamanho2, int result
 
 int main ()
 {
-  # Consigo manipular a quantidade de dados do array sem a necessidade de mudança manual de seus tamanhos.
+  // Consigo manipular a quantidade de dados do array sem a necessidade de mudança manual de seus tamanhos.
   int arr1[] = {1, 2 , 3, 4, 5, 6, 7}, arr2[] = {11, 12, 13, 14, 15, 16}, tamanho1, tamanho2;
   tamanho1 = sizeof(arr1) / sizeof(int);
   tamanho2 = sizeof(arr2) / sizeof(int);
