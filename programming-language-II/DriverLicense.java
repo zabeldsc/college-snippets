@@ -2,13 +2,15 @@ import java.time.LocalDate;
 
 public class DriverLicense {
     private static int idCounter = 0;
-    private int licenseNumber = 0, points = 0;
-    private String cpf, status = "Válida", category;
+    private int licenseNumber, points;
+    private String cpf, status, category;
     private LocalDate expirationDate, issueDate;
 
     public DriverLicense(String cpf, String category) {
         this.licenseNumber = ++idCounter;
+        this.points = 0;
         this.cpf = cpf;
+        this.status = "Válida";
         this.category = category;
         this.issueDate = LocalDate.now();
         this.expirationDate = issueDate.plusYears(1);
