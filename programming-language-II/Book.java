@@ -12,7 +12,7 @@ public class Book {
     }
 
     public float calculateSalePrice(float profitMarginPercentage) {
-        return this.costPrice * (1 + profitMarginPercentage / 100);
+        return this.costPrice + (profitMarginPercentage / 100 * this.costPrice);
     }
 
     public String getBookInfo() {
