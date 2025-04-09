@@ -31,8 +31,7 @@ public class LojaRoupa {
 
     boolean faturamentoSuperior(float faturamentoLoja)
     {
-        if (faturamentoLoja > getValorFaturamento()) return true;
-        return false;
+        return this.getValorFaturamento() > faturamentoLoja;
     }
 
     float valorAluguel()
