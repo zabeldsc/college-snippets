@@ -1,12 +1,33 @@
-#include <lista-circular.hpp>
+#include "../include/lista.hpp"
+
+void ListaCircular::imprimirTexto()
+{
+    if (inicio == nullptr)
+        return;
+
+    NodoString *percorrer = inicio;
+    do
+    {
+        std::cout << percorrer->info << " ";
+        percorrer = percorrer->prox;
+    } while (percorrer != inicio);
+}
 
 void ListaCircular::editarPalavra()
 {
+    if (atual == nullptr)
+        return;
+
+    string palavra;
+
+    cout << "Insira a palavra editada: ";
+    cin >> palavra;
+    atual->info = palavra;
 }
 
 void ListaCircular::inserirPalavra()
 {
-    Nodo *novo = new Nodo();
+    NodoString *novo = new NodoString();
     string palavra;
 
     if (novo == nullptr)
@@ -18,38 +39,86 @@ void ListaCircular::inserirPalavra()
 
     if (inicio == nullptr)
     {
-        novo->prox = inicio;
-        novo->ant = inicio;
+        novo->prox = novo;
+        novo->ant = novo;
         inicio = novo;
         fim = novo;
     }
     else
     {
-        novo->ant = fim;
-        novo->prox = inicio;
-        fim->prox = novo;
-        inicio->ant = novo;
-        fim = novo;
+        if (atual == nullptr)
+            cout << "SOMETHING IS WRONG";
+
+        novo->ant = atual;
+        novo->prox = atual->prox;
+        atual->prox->ant = novo;
+        atual->prox = novo;
     }
+
+    if (atual == fim)
+        fim = novo;
 
     atual = novo;
 }
 
 void ListaCircular::eliminarPalavra()
 {
+    if (atual == nullptr)
+        return;
+
+    NodoString *aux = atual;
+
+    if (atual == inicio && atual == fim)
+    {
+        atual = nullptr;
+        inicio = nullptr;
+        fim = nullptr;
+    }
+    else if (atual == fim)
+    {
+        fim = fim->ant;
+        fim->prox = inicio;
+        inicio->ant = fim;
+        atual = fim;
+    }
+    else if (atual == inicio)
+    {
+        inicio = inicio->prox;
+        inicio->ant = fim;
+        fim->prox = inicio;
+        atual = inicio;
+    }
+    else
+    {
+        atual->ant->prox = atual->prox;
+        atual->prox->ant = atual->ant;
+        atual = atual->ant;
+    }
+
+    delete (aux);
 }
 
 void ListaCircular::palavraAnterior()
 {
+    if (atual == nullptr)
+        return;
+
+    atual = atual->ant;
 }
 
 void ListaCircular::palavraPosterior()
 {
+    if (atual == nullptr)
+        return;
+
+    atual = atual->prox;
 }
 
-void ListaCircular::mostrarMenu(ListaCircular listaCircular)
+void ListaCircular::mostrarMenu()
 {
-    cout << "Estruturas Dados I\n\nPalavra atual: " << (listaCircular.atual != nullptr ? listaCircular.atual->info : "[Nenhuma]") << "\n\nE: Editar palavra atual\nD: Inserir (depois da palavra atual)\nS: Eliminar palavra\n<: Palavra anterior\n>: Palavra posterior\nX: Sair\n\nDigite sua opção: ";
+    cout << "Frase atual: ";
+    imprimirTexto();
+    cout << "\nEstruturas Dados I\n\nPalavra atual: " << (this->atual != nullptr ? this->atual->info : "[Nenhuma]") << "\n\nE: Editar palavra atual\nD: Inserir (depois da palavra atual)\nS: Eliminar palavra\n<: Palavra anterior\n>: Palavra posterior\nX: Sair\n\nDigite sua opção: ";
 }
 
 int main()
@@ -57,10 +126,11 @@ int main()
     ListaCircular listaCircular;
     char resposta = '\0';
 
-    while (resposta != 'X')
+    while (true)
     {
-        listaCircular.mostrarMenu(listaCircular);
+        listaCircular.mostrarMenu();
         cin >> resposta;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (toupper(resposta))
         {
@@ -79,6 +149,8 @@ int main()
         case '>':
             listaCircular.palavraPosterior();
             break;
+        case 'X':
+            exit(0);
         default:
             cout << "Opção inválida!" << endl;
             break;

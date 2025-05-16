@@ -40,13 +40,11 @@ int PilhaDinamica::desempilhar()
 
 void PilhaDinamica::listar()
 {
-    Nodo *aux = new Nodo();
+    Nodo *aux;
     for (aux = topo; aux != nullptr; aux = aux->prox)
     {
         std::cout << aux->info << std::endl;
     }
-
-    delete aux;
 }
 
 int main()
